@@ -1,4 +1,4 @@
-package com.github.jakz.fnt_editor;
+package com.github.jakz.fnt_editor.data;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -12,18 +12,20 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import com.github.jakz.fnt_editor.App;
 import com.pixbits.lib.ui.table.DataSource;
 
 public class Fnt implements DataSource<Glyph>
 {
   private final Map<Character, Glyph> glyphs;
   private final ArrayList<Glyph> array;
-  private Page[] pages;
+  private final List<Page> pages;
   
   public Fnt()
   {
     glyphs = new TreeMap<>();
     array = new ArrayList<>();
+    pages = new ArrayList<>();
   }
   
   private void cacheMapToArray()
@@ -45,11 +47,18 @@ public class Fnt implements DataSource<Glyph>
         if (glyph != null)
           fnt.glyphs.put(glyph.utf16, glyph);
       }
+      else if (line.startsWith("page "))
+      {
+        Page page = Page.parse(line);
+        
+        if (page != null)
+          fnt.pages.add(page);
+      }
     });
     
     fnt.cacheMapToArray();
    
-    App.log("Loaded %s with %d glyphs", fntPath.getFileName().toString(), fnt.glyphs.size());
+    App.log("Loaded %s with %d glyphs in %d pages", fntPath.getFileName().toString(), fnt.glyphs.size(), fnt.pages.size());
     
     return fnt;
   }

@@ -1,4 +1,4 @@
-package com.github.jakz.fnt_editor;
+package com.github.jakz.fnt_editor.data;
 
 import com.pixbits.lib.lang.Point;
 import com.pixbits.lib.lang.Rect;

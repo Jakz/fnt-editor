@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import com.github.jakz.fnt_editor.data.Fnt;
 import com.github.jakz.fnt_editor.ui.GlyphTablePanel;
 import com.pixbits.lib.ui.UIUtils;
 import com.pixbits.lib.ui.WrapperFrame;
@@ -19,7 +20,7 @@ public class App
   {  
     try
     {
-      Path fntPath = Paths.get("C:\\Users\\Jack\\Documents\\dev\\junk-jack\\Resources\\Fonts\\smalltooltip.fnt");
+      Path fntPath = Paths.get("smalltooltip.fnt");
       Fnt fnt = Fnt.load(fntPath);
       
       UIUtils.setNimbusLNF();
